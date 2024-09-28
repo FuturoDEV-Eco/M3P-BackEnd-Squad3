@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const LocalController = require("../controllers/LocalController");
-const checkUserExists = require("../middlewares/checkUserExists");
 const authUser = require("../middlewares/authUser");
 
 const localRoutes = new Router();
