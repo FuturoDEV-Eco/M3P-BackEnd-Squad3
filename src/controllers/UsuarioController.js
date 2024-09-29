@@ -1,5 +1,5 @@
-const Usuario = require("../models/Usuario");
 const { Op } = require("sequelize");
+const Usuario = require("../models/Usuario");
 
 class UsuarioController {
   async create(request, response) {

@@ -1,3 +1,4 @@
+const Local = require('./local')
 const { DataTypes } = require("sequelize");
 const connection = require("../database/connection");
 const {hashSync} = require('bcryptjs')
