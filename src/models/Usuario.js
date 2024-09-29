@@ -1,3 +1,4 @@
+const Local = require('./local')
 const { DataTypes } = require("sequelize");
 const connection = require("../database/connection");
 const {hashSync} = require('bcryptjs')
@@ -11,6 +12,7 @@ const Usuario = connection.define("users", {
   password_hash: { type: DataTypes.STRING, allowNull: false },
   dataNascimento: DataTypes.DATE,
 });
+
 
 Usuario.beforeSave((users) => {
     users.password_hash = hashSync(users.password_hash, 10)

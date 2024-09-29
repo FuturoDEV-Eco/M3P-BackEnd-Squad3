@@ -13,14 +13,13 @@ module.exports = {
       nome: { allowNull: false, type: Sequelize.STRING },
       descricao: { type: Sequelize.STRING },
       cep: { allowNull: false, type: Sequelize.STRING },
-      user_id: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "users", key: "id" },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      cep: { type: Sequelize.STRING },
       bairro: { type: Sequelize.STRING },
       logradouro: { type: Sequelize.STRING }, // lembraça: lougradouro é rua
       localidade: { type: Sequelize.STRING },

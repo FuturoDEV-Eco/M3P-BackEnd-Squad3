@@ -1,14 +1,21 @@
 const { DataTypes } = require("sequelize");
 const connection = require("../database/connection");
 
+
+
 const Local = connection.define(
-  "Local",
+  "locations",
   {
     nome: { type: DataTypes.STRING, allowNull: false },
     descricao: DataTypes.STRING,
     cep: { type: DataTypes.STRING, allowNull: false },
-    userId: { type: DataTypes.INTEGER, allowNull: false },
-    cep: DataTypes.STRING,
+    userId: { 
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'users', 
+        key: 'id'
+      },
+    },
     bairro: DataTypes.STRING,
     logradouro: DataTypes.STRING,
     localidade: DataTypes.STRING,
@@ -18,9 +25,8 @@ const Local = connection.define(
     googleMapsLink: DataTypes.STRING,
   },
   {
-    tableName: "Locations",
+    tableName: "locations",
   }
 );
-
 
 module.exports = Local;
