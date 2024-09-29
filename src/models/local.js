@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 const connection = require("../database/connection");
 
 const Local = connection.define(
-  "Local",
+  "locations",
   {
     nome: { type: DataTypes.STRING, allowNull: false },
     descricao: DataTypes.STRING,
@@ -18,9 +18,10 @@ const Local = connection.define(
     googleMapsLink: DataTypes.STRING,
   },
   {
-    tableName: "Locations",
+    tableName: "locations",
   }
 );
+
 
 
 module.exports = Local;

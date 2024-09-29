@@ -12,6 +12,7 @@ const Usuario = connection.define("users", {
   dataNascimento: DataTypes.DATE,
 });
 
+
 Usuario.beforeSave((users) => {
     users.password_hash = hashSync(users.password_hash, 10)
     return users
