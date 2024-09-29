@@ -4,10 +4,21 @@ const Local = require("../models/local");
 
 class LocalController {
   async create(request, response) {
-    const { nome, cep, bairro, logradouro, estado, numero } = request.body;
+    const { nome, cep, bairro, logradouro, estado, numero, residuos_aceitos } = request.body;
     let { coordenadas, descricao, localidade } = request.body;
     const userId = request.currentId;
     const errors = [];
+
+    const validResiduos = ["Vidro", "Metal", "Papel", "Plástico", "Orgânicos", "Baterias", "Eletrônicos", "Móveis"];
+    const invalidResiduos = residuos_aceitos.filter(residuo => !validResiduos.includes(residuo));
+
+    if (invalidResiduos.length > 0) {
+      return response.status(400).json({
+        msg: "Para salvar precisa enviar pelo menos 1 residuo aceito pelo local, verificar os residuos padrão: 'Vidro', 'Metal', 'Papel', 'Plástico', 'Orgânicos', 'Baterias', 'Eletrônicos', 'Móveis'",
+        param: "residuos_aceitos",
+        invalidValues: invalidResiduos
+      });
+    }
 
     if (!coordenadas) {
       const mapResult = await getMapLocal(cep);
@@ -62,6 +73,7 @@ class LocalController {
         logradouro,
         estado,
         numero,
+        residuos_aceitos,
         coordenadas,
         googleMapsLink,
       });

@@ -25,6 +25,7 @@ module.exports = {
       localidade: { type: Sequelize.STRING },
       estado: { type: Sequelize.STRING },
       numero: { type: Sequelize.INTEGER },
+      residuos_aceitos: { type: Sequelize.ARRAY(Sequelize.STRING)},
       coordenadas: { type: Sequelize.TEXT },
       googleMapsLink: { type: Sequelize.STRING },
       createdAt: { allowNull: false, type: Sequelize.DATE },
