@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const LocalController = require("../controllers/LocalController");
 const authUser = require("../middlewares/authUser");
+const checkUserCanDeleteLocal = require('../middlewares/checkUserCanDeleteLocal')
 
 const localRoutes = new Router();
 
@@ -131,7 +132,7 @@ localRoutes.put(
 
 localRoutes.delete(
   "/:id",
-  authUser,
+  authUser, checkUserCanDeleteLocal,
   /* 
     #swagger.tags = ['Locais'],
     #swagger.description = 'Endpoint para deletar um local',
