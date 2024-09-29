@@ -1,11 +1,11 @@
 const Local = require("../models/local");
 const { Op } = require("sequelize");
-const { getMapLocal, getGoogleMapsLink, getBairroFromCep } = require("../services/map.service");
+const { getMapLocal, getGoogleMapsLink } = require("../services/map.service");
 
 class LocalController {
   async create(request, response) {
-    const { nome, cep, bairro, logradouro, localidade, estado, numero } = request.body;
-    let { coordenadas, descricao } = request.body;
+    const { nome, cep, bairro, logradouro, estado, numero } = request.body;
+    let { coordenadas, descricao, localidade } = request.body;
     const userId = request.currentId;
     const errors = [];
 
@@ -32,20 +32,20 @@ class LocalController {
       });
     }
 
-    // if (!nome) {
-    //   errors.push({ msg: "Location name is required", param: "nome" });
-    // }
+    if (!nome) {
+      errors.push({ msg: "Location name is required", param: "nome" });
+    }
 
     if (!cep) {
       errors.push({ msg: "Location cep is required", param: "cep" });
     }
 
-    // if (!descricao) {
-    //   descricao = "";
-    // }
-    // if (!localidade) {
-    //   localidade = "";
-    // }
+    if (!descricao) {
+      descricao = "";
+    }
+    if (!localidade) {
+      localidade = "";
+    }
 
     if (errors.length > 0) {
       return response.status(400).json({ errors });

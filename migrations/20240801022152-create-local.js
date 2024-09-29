@@ -13,7 +13,7 @@ module.exports = {
       nome: { allowNull: false, type: Sequelize.STRING },
       descricao: { type: Sequelize.STRING },
       cep: { allowNull: false, type: Sequelize.STRING },
-      user_id: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "users", key: "id" },
