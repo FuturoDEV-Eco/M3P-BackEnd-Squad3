@@ -20,7 +20,12 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
+      cep: { type: Sequelize.STRING },
+      bairro: { type: Sequelize.STRING },
+      logradouro: { type: Sequelize.STRING }, // lembraça: lougradouro é rua
       localidade: { type: Sequelize.STRING },
+      estado: { type: Sequelize.STRING },
+      numero: { type: Sequelize.INTEGER },
       coordenadas: { type: Sequelize.TEXT },
       googleMapsLink: { type: Sequelize.STRING },
       createdAt: { allowNull: false, type: Sequelize.DATE },

@@ -13,10 +13,10 @@ module.exports = {
       nome: { type: Sequelize.STRING, allowNull: false },
       sexo: { type: Sequelize.STRING },
       cpf: { type: Sequelize.STRING, unique: true, allowNull: false },
-      endereco: { type: Sequelize.STRING },
       email: { type: Sequelize.STRING, unique: true, allowNull: false },
       password_hash: { type: Sequelize.STRING, allowNull: false },
       dataNascimento: { type: Sequelize.DATE },
+      endereco:{type: Sequelize.STRING},
       createdAt: { allowNull: false, type: Sequelize.DATE },
       updatedAt: { allowNull: false, type: Sequelize.DATE },
     });

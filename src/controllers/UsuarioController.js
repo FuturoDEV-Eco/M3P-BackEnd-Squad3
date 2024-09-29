@@ -8,7 +8,7 @@ class UsuarioController {
 
     const dados = request.body;
 
-    const { nome, cpf, email, password, dataNascimento, endereco, sexo } =
+    const { nome, cpf, email, password, dataNascimento, sexo, endereco  } =
       request.body;
 
     const userExist = await Usuario.findOne({
