@@ -1,6 +1,7 @@
 const { verify } = require("jsonwebtoken");
+const Usuario = require('../models/Usuario')
 
-function authUser(request, response, next) {
+async function authUser(request, response, next) {
   try {
     const authHeader = request.headers.authorization;
 
@@ -16,6 +17,12 @@ function authUser(request, response, next) {
 
     try {
       const result = verify(token, process.env.JWT_SECRET);
+
+      const user = await Usuario.findByPk(result.id);
+      if (!user) {
+        return response.status(401).json({ message: "User not found" });
+      }
+
 
       request.currentId = result.id;
       next();
