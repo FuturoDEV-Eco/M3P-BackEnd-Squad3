@@ -1,8 +1,8 @@
-const Local = require("../models/Local");
+const Local = require("../models/local");
 const Usuario = require("../models/Usuario");
 
 async function checkUserHasLocal(req, res, next) {
-  const userId = req.params.id;
+  const userId = req.currenId.id;
 
   try {
     const user = await Usuario.findByPk(userId);

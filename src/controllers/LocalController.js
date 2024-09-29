@@ -1,4 +1,4 @@
-const Local = require("../models/Local");
+const Local = require("../models/local");
 const { Op } = require("sequelize");
 const { getMapLocal, getGoogleMapsLink } = require("../services/map.service");
 
@@ -69,6 +69,39 @@ class LocalController {
         .json({ message: "Error creating new location", error: error.message });
     }
   }
+  
+  async searchAll(request, response) {
+    try {
+      const { nome, descricao, localidade, coordenadas, cep, googleMapsLink } =
+        request.query;
+      const where = {};
+
+      if (nome) {
+        where.nome = { [Op.like]: `%${nome}%` };
+      }
+
+      if (coordenadas) {
+        where.coordenadas = { [Op.like]: `%${coordenadas}%` };
+      }
+
+      if (cep) {
+        where.cep = { [Op.like]: `%${cep}%` };
+      }
+      if (googleMapsLink) {
+        where.googleMapsLink = { [Op.like]: `%${googleMapsLink}%` };
+      }
+
+      where.userId = request.currentId;
+
+      const locais = await Local.findAll({ where });
+      response.json(locais);
+    } catch (error) {
+      response.status(500).json({
+        mensagem: "Unable to search for locations",
+      });
+    }
+  }
+
 
   async searchAll(request, response) {
     try {
@@ -101,6 +134,48 @@ class LocalController {
       });
     }
   }
+
+
+
+  // Embaixo a antiga função searhAll trocada de nome para: searchWithFilters, função trocada porque não era uma função searchAll, é mais um seach con filtros, do que um searchAll.
+
+  async searchWithFilters(request, response) {
+    try {
+      const { nome, descricao, localidade, coordenadas, cep, googleMapsLink } =
+        request.query;
+      const where = {};
+
+      if (nome) {
+        where.nome = { [Op.like]: `%${nome}%` };
+      }
+
+      if (coordenadas) {
+        where.coordenadas = { [Op.like]: `%${coordenadas}%` };
+      }
+
+      if (cep) {
+        where.cep = { [Op.like]: `%${cep}%` };
+      }
+      if (googleMapsLink) {
+        where.googleMapsLink = { [Op.like]: `%${googleMapsLink}%` };
+      }
+
+      where.userId = request.currentId;
+
+      const locais = await Local.findAll({ where });
+      response.json(locais);
+    } catch (error) {
+      response.status(500).json({
+        mensagem: "Unable to search for locations",
+      });
+    }
+  }
+
+
+
+
+  //
+
 
   async update(request, response) {
     const { nome, descricao, localidade, coordenadas, cep, googleMapsLink } =
