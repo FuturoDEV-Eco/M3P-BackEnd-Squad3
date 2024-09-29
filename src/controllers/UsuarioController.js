@@ -6,8 +6,20 @@ class UsuarioController {
     console.log("request IS:");
     console.dir(request.body);
 
-    const { nome, cpf, email, senha, dataNascimento, endereco, sexo } =
+    const dados = request.body;
+
+    const { nome, cpf, email, password, dataNascimento, endereco, sexo } =
       request.body;
+
+    const userExist = await Usuario.findOne({
+      where: {
+      email: dados.email
+      }
+    })
+  
+    if(userExist) {
+      return response.status(409).json({mensagem: 'Ja existe uma conta com esse email'})
+    }
 
     const errors = [];
     if (!nome) {
@@ -16,22 +28,28 @@ class UsuarioController {
         param: "nome",
       });
     }
+
+    if (dados.cpf.length !== 11) {
+      return response.status(404).json('Seu CPF esta incorreto, por favor digite novamente');
+    }
+
     if (!cpf) {
       errors.push({
         msg: "CPF is required and not null",
         param: "cpf",
       });
     }
+
     if (!email) {
       errors.push({
         msg: "Email is required and not null",
         param: "email",
       });
     }
-    if (!senha) {
+    if (!password) {
       errors.push({
         msg: "User password is required and not null",
-        param: "senha",
+        param: "password",
       });
     }
 
@@ -55,7 +73,7 @@ class UsuarioController {
         nome,
         cpf,
         email,
-        senha,
+        password_hash: dados.password,
         dataNascimento,
         endereco,
         sexo,
@@ -63,7 +81,7 @@ class UsuarioController {
       return response.status(201).json(usuario);
     } catch (error) {
       response.status(500).json({
-        mensagem: "Unable to create user",
+        mensagem: "Unable to create user", error,
       });
     }
   }
@@ -109,14 +127,14 @@ class UsuarioController {
   }
 
   async update(request, response) {
-    const { nome, cpf, email, senha, dataNascimento, endereco, sexo } =
+    const { nome, cpf, email, password_hash, dataNascimento, endereco, sexo } =
       request.body;
     const errors = [];
     if (
       !nome &&
       !cpf &&
       !email &&
-      !senha &&
+      !password_hash &&
       !dataNascimento &&
       !endereco &&
       !sexo
@@ -146,7 +164,7 @@ class UsuarioController {
       if (dados.nome) usuario.nome = dados.nome;
       if (dados.cpf) usuario.cpf = dados.cpf;
       if (dados.email) usuario.email = dados.email;
-      if (dados.senha) usuario.senha = dados.senha;
+      if (dados.password) usuario.password_hash = dados.password;
       if (dados.dataNascimento) usuario.dataNascimento = dados.dataNascimento;
       if (dados.endereco) usuario.endereco = dados.endereco;
       if (dados.sexo) usuario.sexo = dados.sexo;
@@ -194,6 +212,8 @@ class UsuarioController {
 
     response.json(usuario);
   }
+
+
 }
 
 module.exports = new UsuarioController();

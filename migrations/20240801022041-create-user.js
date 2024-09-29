@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("Users", {
+    return queryInterface.createTable("users", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -15,13 +15,14 @@ module.exports = {
       cpf: { type: Sequelize.STRING, unique: true, allowNull: false },
       endereco: { type: Sequelize.STRING },
       email: { type: Sequelize.STRING, unique: true, allowNull: false },
-      senha: { type: Sequelize.STRING, allowNull: false },
+      password_hash: { type: Sequelize.STRING, allowNull: false },
       dataNascimento: { type: Sequelize.DATE },
       createdAt: { allowNull: false, type: Sequelize.DATE },
       updatedAt: { allowNull: false, type: Sequelize.DATE },
     });
   },
+  
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("Users");
+    return queryInterface.dropTable("users");
   },
 };

@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("Locations", {
+    return queryInterface.createTable("locations", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,9 +13,12 @@ module.exports = {
       nome: { allowNull: false, type: Sequelize.STRING },
       descricao: { type: Sequelize.STRING },
       cep: { allowNull: false, type: Sequelize.STRING },
-      userId: {
+      user_id: {
         type: Sequelize.INTEGER,
-        references: { model: "Users", key: "id" },
+        allowNull: false,
+        references: { model: "users", key: "id" },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       localidade: { type: Sequelize.STRING },
       coordenadas: { type: Sequelize.TEXT },
@@ -25,6 +28,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("Locations");
+    return queryInterface.dropTable("locations");
   },
 };

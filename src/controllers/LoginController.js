@@ -1,3 +1,4 @@
+const { compare, compareSync } = require("bcryptjs");
 const Usuario = require("../models/Usuario");
 const { sign } = require("jsonwebtoken");
 
@@ -12,19 +13,37 @@ class LoginController {
           .json({ message: "Email and password are required" });
       }
 
+      // bcryptjs functions, functions to compare encrypted passwords to login: 
+
       const user = await Usuario.findOne({
         where: {
           email: data.email,
         },
       });
 
+      
+
+      if(!user) {
+        return response.status(404).json({mensagem: "Conta não encontrada"})
+      }
+
+      
       if (!user) {
         return response.status(404).json({ message: "Account not found" });
       }
 
-      const passwordIsCorrect = data.senha === user.senha;
 
-      if (passwordIsCorrect === false) {
+      const rightPassword = compareSync(data.senha, user.password_hash)
+
+      if(rightPassword === false) {
+        return response.status(404).json({mensagem: "Senha Incorreta"})
+
+      }
+
+      // ---------------------------------------------------------
+
+
+      if (rightPassword === false) {
         return response.status(404).json({
           message: "Account not found with this email or password",
         });
