@@ -36,7 +36,7 @@ class LoginController {
       const rightPassword = compareSync(data.senha, user.password_hash)
 
       if(rightPassword === false) {
-        return response.status(404).json({mensagem: "Senha Incorreta"})
+        return response.status(404).json({mensagem: "Account not found"})
 
       }
 
