@@ -21,6 +21,7 @@ const Local = connection.define(
     localidade: DataTypes.STRING,
     estado: DataTypes.STRING,
     numero: DataTypes.INTEGER,
+    residuos_aceitos: DataTypes.ARRAY(DataTypes.STRING),
     coordenadas: DataTypes.TEXT,
     googleMapsLink: DataTypes.STRING,
   },
