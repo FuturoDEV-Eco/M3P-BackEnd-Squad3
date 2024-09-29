@@ -1,6 +1,6 @@
-const Local = require("../models/local");
 const { Op } = require("sequelize");
 const { getMapLocal, getGoogleMapsLink } = require("../services/map.service");
+const Local = require("../models/local");
 
 class LocalController {
   async create(request, response) {
