@@ -4,13 +4,14 @@ const connection = require("../database/connection");
 const {hashSync} = require('bcryptjs')
 
 const Usuario = connection.define("users", {
+  
   nome: { type: DataTypes.STRING, allowNull: false },
-  sexo: DataTypes.STRING,
+  sexo: { type: DataTypes.STRING, allowNull: false },
   cpf: { type: DataTypes.STRING, unique: true, allowNull: false },
-  endereco: DataTypes.STRING,
+  endereco: { type: DataTypes.STRING, allowNull: false },
   email: { type: DataTypes.STRING, unique: true, allowNull: false },
   password_hash: { type: DataTypes.STRING, allowNull: false },
-  dataNascimento: DataTypes.DATE,
+  dataNascimento: { type: DataTypes.DATE, allowNull: false }
 });
 
 
