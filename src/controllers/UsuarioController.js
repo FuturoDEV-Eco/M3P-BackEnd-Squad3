@@ -179,6 +179,7 @@ class UsuarioController {
     }
   }
 
+
   async delete(request, response) {
     try {
       const id = request.params.id;
@@ -187,6 +188,14 @@ class UsuarioController {
       if (!usuario) {
         return response.status(404).json({
           mensagem: "User with the given id was not found",
+        });
+      }
+
+      const locaisCount = await Local.count({ where: { userId: id } });
+
+      if (locaisCount > 0) {
+        return response.status(400).json({
+          mensagem: "User cannot be deleted because they have associated locatios",
         });
       }
 
@@ -199,6 +208,10 @@ class UsuarioController {
       });
     }
   }
+
+
+
+
 
   async searchOne(request, response) {
     const id = request.params.id;

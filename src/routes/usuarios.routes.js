@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const UsuarioController = require("../controllers/UsuarioController");
-const checkUserHasLocal = require("../middlewares/checkUserHasLocal");
 
 const usuariosRoutes = new Router();
 
@@ -132,7 +131,7 @@ usuariosRoutes.put(
 
 usuariosRoutes.delete(
   "/:id",
-  checkUserHasLocal,
+  
   /* 
     #swagger.tags = ['Usuários'],
     #swagger.description = 'Endpoint para deletar um usuário',
