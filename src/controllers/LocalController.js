@@ -88,69 +88,14 @@ class LocalController {
   
   async searchAll(request, response) {
     try {
-      const { nome, descricao, localidade, coordenadas, cep, googleMapsLink } =
-        request.query;
-      const where = {};
-
-      if (nome) {
-        where.nome = { [Op.like]: `%${nome}%` };
-      }
-
-      if (coordenadas) {
-        where.coordenadas = { [Op.like]: `%${coordenadas}%` };
-      }
-
-      if (cep) {
-        where.cep = { [Op.like]: `%${cep}%` };
-      }
-      if (googleMapsLink) {
-        where.googleMapsLink = { [Op.like]: `%${googleMapsLink}%` };
-      }
-
-      where.userId = request.currentId;
-
-      const locais = await Local.findAll({ where });
+      const locais = await Local.findAll();
       response.json(locais);
     } catch (error) {
       response.status(500).json({
-        mensagem: "Unable to search for locations",
+        mensagem: "Unable to retrieve locations",
       });
     }
   }
-
-
-  async searchAll(request, response) {
-    try {
-      const { nome, descricao, localidade, coordenadas, cep, googleMapsLink } =
-        request.query;
-      const where = {};
-
-      if (nome) {
-        where.nome = { [Op.like]: `%${nome}%` };
-      }
-
-      if (coordenadas) {
-        where.coordenadas = { [Op.like]: `%${coordenadas}%` };
-      }
-
-      if (cep) {
-        where.cep = { [Op.like]: `%${cep}%` };
-      }
-      if (googleMapsLink) {
-        where.googleMapsLink = { [Op.like]: `%${googleMapsLink}%` };
-      }
-
-      where.userId = request.currentId;
-
-      const locais = await Local.findAll({ where });
-      response.json(locais);
-    } catch (error) {
-      response.status(500).json({
-        mensagem: "Unable to search for locations",
-      });
-    }
-  }
-
 
 
   // Embaixo a antiga função searhAll trocada de nome para: searchWithFilters, função trocada porque não era uma função searchAll, é mais um seach con filtros, do que um searchAll.

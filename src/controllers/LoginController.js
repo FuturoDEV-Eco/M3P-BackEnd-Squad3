@@ -21,8 +21,6 @@ class LoginController {
         },
       });
 
-      
-
       if(!user) {
         return response.status(404).json({mensagem: "Conta não encontrada"})
       }
