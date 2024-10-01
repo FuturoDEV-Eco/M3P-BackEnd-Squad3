@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const UsuarioController = require("../controllers/UsuarioController");
+const authUser = require("../middlewares/authUser");
 
 const usuariosRoutes = new Router();
 
@@ -51,7 +52,7 @@ usuariosRoutes.post(
 );
 
 usuariosRoutes.get(
-  "/",
+  "/", authUser,
   /* 
     #swagger.tags = ['Usuários'],
     #swagger.description = 'Endpoint para buscar todos os usuários',
@@ -82,7 +83,7 @@ usuariosRoutes.get(
 );
 
 usuariosRoutes.put(
-  "/:id",
+  "/:id", authUser,
   /* 
     #swagger.tags = ['Usuários'],
     #swagger.description = 'Endpoint para atualizar um usuário',
@@ -130,7 +131,7 @@ usuariosRoutes.put(
 );
 
 usuariosRoutes.delete(
-  "/:id",
+  "/:id", authUser,
   
   /* 
     #swagger.tags = ['Usuários'],
@@ -152,7 +153,7 @@ usuariosRoutes.delete(
 );
 
 usuariosRoutes.get(
-  "/:id",
+  "/:id", authUser,
   /* 
     #swagger.tags = ['Usuários'],
     #swagger.description = 'Endpoint para buscar um usuário pelo ID',
