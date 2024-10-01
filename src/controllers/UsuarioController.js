@@ -46,6 +46,15 @@ class UsuarioController {
         param: "email",
       });
     }
+    
+    if (email && !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+      errors.push({
+        msg: "Please enter a valid email address.",
+        param: "email",
+      });
+    }
+
+
     if (!password) {
       errors.push({
         msg: "User password is required and not null",
@@ -127,14 +136,14 @@ class UsuarioController {
   }
 
   async update(request, response) {
-    const { nome, cpf, email, password_hash, dataNascimento, endereco, sexo } =
+    const { nome, cpf, email, senha, dataNascimento, endereco, sexo } =
       request.body;
     const errors = [];
     if (
       !nome &&
       !cpf &&
       !email &&
-      !password_hash &&
+      !senha &&
       !dataNascimento &&
       !endereco &&
       !sexo
@@ -142,6 +151,13 @@ class UsuarioController {
       errors.push({
         msg: "At least one of the following must be a valid update value: name, cpf, email, password, birth date, address or gender.",
         param: ["nome"],
+      });
+    }
+
+    if (email && !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+      errors.push({
+        msg: "Please enter a valid email address.",
+        param: "email",
       });
     }
 
@@ -164,7 +180,7 @@ class UsuarioController {
       if (dados.nome) usuario.nome = dados.nome;
       if (dados.cpf) usuario.cpf = dados.cpf;
       if (dados.email) usuario.email = dados.email;
-      if (dados.password) usuario.password_hash = dados.password;
+      if (dados.senha) usuario.senha = dados.senha;
       if (dados.dataNascimento) usuario.dataNascimento = dados.dataNascimento;
       if (dados.endereco) usuario.endereco = dados.endereco;
       if (dados.sexo) usuario.sexo = dados.sexo;
