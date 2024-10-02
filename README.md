@@ -58,7 +58,7 @@ RecycleSpot API is a system developed to automate actions related to storing inf
 
 4. Configure environment variables:
 
-   Create a `.env` file in the project root with the following content:
+   Create a `.env` file in the project root (`/src`) with the following content:
 
 ```
 APP_PORT=3000
