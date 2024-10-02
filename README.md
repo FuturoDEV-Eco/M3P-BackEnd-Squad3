@@ -71,7 +71,7 @@ DB_PASSWORD=postgres
 JWT_SECRET=j438n493n7348n5
 ```
 
-5. Run migrations to create the database tables:
+5.  Move to the `/src` folder and run the migrations to create the database tables:
 
    ```bash
         npx sequelize db:migrate
@@ -83,7 +83,7 @@ JWT_SECRET=j438n493n7348n5
 npx sequelize db:seed:all
 ```
 
-7. Ensure your database is running and move to the /src folder before running the system:
+7. Ensure your database is running and when on `/src` folder run the following:
 
    ```bash
    cd /src
