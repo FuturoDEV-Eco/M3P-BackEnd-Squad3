@@ -47,7 +47,7 @@ RecycleSpot API is a system developed to automate actions related to storing inf
 2. Navigate to the project directory:
 
    ```bash
-   cd m02project
+   cd M3P-BackEnd-Squad3
    ```
 
 3. Install dependencies:
