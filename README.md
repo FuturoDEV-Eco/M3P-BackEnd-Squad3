@@ -41,7 +41,7 @@ RecycleSpot API is a system developed to automate actions related to storing inf
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Felipevhm/m02project/
+   git clone https://github.com/FuturoDEV-Eco/M3P-BackEnd-Squad3
    ```
 
 2. Navigate to the project directory:
