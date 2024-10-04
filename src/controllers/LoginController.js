@@ -13,7 +13,7 @@ class LoginController {
           .json({ message: "Email and password are required" });
       }
 
-      // bcryptjs functions, functions to compare encrypted passwords to login: 
+      // bcryptjs functions, functions to compare encrypted passwords to login:
 
       const user = await Usuario.findOne({
         where: {
@@ -21,25 +21,21 @@ class LoginController {
         },
       });
 
-      if(!user) {
-        return response.status(404).json({mensagem: "Conta não encontrada"})
+      if (!user) {
+        return response.status(404).json({ mensagem: "Conta não encontrada" });
       }
 
-      
       if (!user) {
         return response.status(404).json({ message: "Account not found" });
       }
 
+      const rightPassword = compareSync(data.senha, user.password_hash);
 
-      const rightPassword = compareSync(data.senha, user.password_hash)
-
-      if(rightPassword === false) {
-        return response.status(404).json({mensagem: "Account not found"})
-
+      if (rightPassword === false) {
+        return response.status(404).json({ mensagem: "Account not found" });
       }
 
       // ---------------------------------------------------------
-
 
       if (rightPassword === false) {
         return response.status(404).json({

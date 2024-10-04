@@ -14,10 +14,10 @@ routes.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 routes.use("/usuario", usuariosRoutes);
 routes.use("/local", localRoutes);
-routes.use(dashboardRoutes); 
+routes.use(dashboardRoutes);
 routes.post(
   "/login",
-    /* 
+  /* 
      #swagger.tags = ['Login'],
      #swagger.description = 'Endpoint para login',
      #swagger.parameters['login'] = {
