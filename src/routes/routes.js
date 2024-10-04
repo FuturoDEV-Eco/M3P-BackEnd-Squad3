@@ -2,6 +2,7 @@ const { Router } = require("express");
 
 const usuariosRoutes = require("./usuarios.routes");
 const localRoutes = require("./local.routes");
+const dashboardRoutes = require("./dashboard.routes"); // Adicionando as rotas do dashboard
 const LoginController = require("../controllers/LoginController");
 
 const routes = new Router();
@@ -13,9 +14,10 @@ routes.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 routes.use("/usuario", usuariosRoutes);
 routes.use("/local", localRoutes);
+routes.use(dashboardRoutes); 
 routes.post(
   "/login",
-  /* 
+    /* 
      #swagger.tags = ['Login'],
      #swagger.description = 'Endpoint para login',
      #swagger.parameters['login'] = {

@@ -241,7 +241,16 @@ class UsuarioController {
 
     response.json(usuario);
   }
+  async searchAllForDashboard() {
+    try {
+      const usuarios = await Usuario.findAll();
+      return usuarios;  // Retorna os dados
+    } catch (error) {
+      throw new Error("Erro ao buscar usuários");
+    }
+  }
 
+  
 
 }
 

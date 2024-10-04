@@ -270,5 +270,15 @@ class LocalController {
     const googleMapsLink = local.googleMapsLink;
     response.json({ nome, googleMapsLink });
   }
+
+  async searchAllForDashboard() {
+    try {
+      const locais = await Local.findAll();
+      return locais;  // Retorna os dados
+    } catch (error) {
+      throw new Error("Erro ao buscar locais");
+    }
+  }
+
 }
 module.exports = new LocalController();
