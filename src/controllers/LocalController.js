@@ -4,19 +4,31 @@ const Local = require("../models/local");
 
 class LocalController {
   async create(request, response) {
-    const { nome, cep, bairro, logradouro, estado, numero, residuos_aceitos } = request.body;
+    const { nome, cep, bairro, logradouro, estado, numero, residuos_aceitos } =
+      request.body;
     let { coordenadas, descricao, localidade } = request.body;
     const userId = request.currentId;
     const errors = [];
 
-    const validResiduos = ["Vidro", "Metal", "Papel", "Plástico", "Orgânicos", "Baterias", "Eletrônicos", "Móveis"];
-    const invalidResiduos = residuos_aceitos.filter(residuo => !validResiduos.includes(residuo));
+    const validResiduos = [
+      "Vidro",
+      "Metal",
+      "Papel",
+      "Plástico",
+      "Orgânicos",
+      "Baterias",
+      "Eletrônicos",
+      "Móveis",
+    ];
+    const invalidResiduos = residuos_aceitos.filter(
+      (residuo) => !validResiduos.includes(residuo),
+    );
 
     if (invalidResiduos.length > 0) {
       return response.status(400).json({
         msg: "Para salvar precisa enviar pelo menos 1 residuo aceito pelo local, verificar os residuos padrão: 'Vidro', 'Metal', 'Papel', 'Plástico', 'Orgânicos', 'Baterias', 'Eletrônicos', 'Móveis'",
         param: "residuos_aceitos",
-        invalidValues: invalidResiduos
+        invalidValues: invalidResiduos,
       });
     }
 
@@ -85,7 +97,7 @@ class LocalController {
         .json({ message: "Error creating new location", error: error.message });
     }
   }
-  
+
   async searchAll(request, response) {
     try {
       const locais = await Local.findAll();
@@ -96,7 +108,6 @@ class LocalController {
       });
     }
   }
-
 
   // Embaixo a antiga função searhAll trocada de nome para: searchWithFilters, função trocada porque não era uma função searchAll, é mais um seach con filtros, do que um searchAll.
 
@@ -132,11 +143,7 @@ class LocalController {
     }
   }
 
-
-
-
   //
-
 
   async update(request, response) {
     const { nome, descricao, localidade, coordenadas, cep, googleMapsLink } =
@@ -269,6 +276,15 @@ class LocalController {
     const nome = local.nome;
     const googleMapsLink = local.googleMapsLink;
     response.json({ nome, googleMapsLink });
+  }
+
+  async searchAllForDashboard() {
+    try {
+      const locais = await Local.findAll();
+      return locais; // Retorna os dados
+    } catch (error) {
+      throw new Error("Erro ao buscar locais");
+    }
   }
 }
 module.exports = new LocalController();

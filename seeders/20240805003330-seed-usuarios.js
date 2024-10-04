@@ -1,16 +1,15 @@
 "use strict";
-const {hashSync} = require('bcryptjs')
+const { hashSync } = require("bcryptjs");
 
 /** @type {import('sequelize-cli').Migration} */
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-
-    const hashedPassword1 = hashSync('password1', 10);
-    const hashedPassword2 = hashSync('password2', 10);
-    const hashedPassword3 = hashSync('password3', 10);
-    const hashedPassword4 = hashSync('password4', 10);
-    const hashedPassword5 = hashSync('password5', 10);
+    const hashedPassword1 = hashSync("password1", 10);
+    const hashedPassword2 = hashSync("password2", 10);
+    const hashedPassword3 = hashSync("password3", 10);
+    const hashedPassword4 = hashSync("password4", 10);
+    const hashedPassword5 = hashSync("password5", 10);
 
     await queryInterface.bulkInsert(
       "users",
@@ -41,7 +40,8 @@ module.exports = {
           nome: "Beatriz Souza",
           sexo: "Feminino",
           cpf: "34567890123",
-          endereco: " Rua das Palmeiras, 789, Bairro Bela Vista, Porto Alegre, RS, Brasil",
+          endereco:
+            " Rua das Palmeiras, 789, Bairro Bela Vista, Porto Alegre, RS, Brasil",
           email: "beatrizsouza@example.com",
           password_hash: hashedPassword3,
           dataNascimento: new Date(1992, 2, 3),
@@ -63,7 +63,8 @@ module.exports = {
           nome: "João Oliveira",
           sexo: "Masculino",
           cpf: "56789012345",
-          endereco: "Avenida das Nações, 202, Bairro Internacional, Brasília, DF, Brasil",
+          endereco:
+            "Avenida das Nações, 202, Bairro Internacional, Brasília, DF, Brasil",
           email: "joaooliveira@example.com",
           password_hash: hashedPassword5,
           dataNascimento: new Date(1994, 4, 5),

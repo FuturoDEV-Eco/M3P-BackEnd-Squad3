@@ -1,5 +1,5 @@
-const Usuario = require('./Usuario')
-const Local = require('./local')
+const Usuario = require("./Usuario");
+const Local = require("./local");
 
-Local.belongsTo(Usuario, { foreignKey: 'userId' });
-Usuario.hasMany(Local, { foreignKey: 'userId' });
+Local.belongsTo(Usuario, { foreignKey: "userId" });
+Usuario.hasMany(Local, { foreignKey: "userId" });

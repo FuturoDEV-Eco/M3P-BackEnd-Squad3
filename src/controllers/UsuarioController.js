@@ -8,17 +8,19 @@ class UsuarioController {
 
     const dados = request.body;
 
-    const { nome, cpf, email, password, dataNascimento, sexo, endereco  } =
+    const { nome, cpf, email, password, dataNascimento, sexo, endereco } =
       request.body;
 
     const userExist = await Usuario.findOne({
       where: {
-      email: dados.email
-      }
-    })
-  
-    if(userExist) {
-      return response.status(409).json({mensagem: 'Ja existe uma conta com esse email'})
+        email: dados.email,
+      },
+    });
+
+    if (userExist) {
+      return response
+        .status(409)
+        .json({ mensagem: "Ja existe uma conta com esse email" });
     }
 
     const errors = [];
@@ -30,7 +32,9 @@ class UsuarioController {
     }
 
     if (dados.cpf.length !== 11) {
-      return response.status(404).json('Seu CPF esta incorreto, por favor digite novamente');
+      return response
+        .status(404)
+        .json("Seu CPF esta incorreto, por favor digite novamente");
     }
 
     if (!cpf) {
@@ -46,14 +50,16 @@ class UsuarioController {
         param: "email",
       });
     }
-    
-    if (email && !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+
+    if (
+      email &&
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)
+    ) {
       errors.push({
         msg: "Please enter a valid email address.",
         param: "email",
       });
     }
-
 
     if (!password) {
       errors.push({
@@ -90,7 +96,8 @@ class UsuarioController {
       return response.status(201).json(usuario);
     } catch (error) {
       response.status(500).json({
-        mensagem: "Unable to create user", error,
+        mensagem: "Unable to create user",
+        error,
       });
     }
   }
@@ -154,7 +161,10 @@ class UsuarioController {
       });
     }
 
-    if (email && !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+    if (
+      email &&
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)
+    ) {
       errors.push({
         msg: "Please enter a valid email address.",
         param: "email",
@@ -195,7 +205,6 @@ class UsuarioController {
     }
   }
 
-
   async delete(request, response) {
     try {
       const id = request.params.id;
@@ -211,7 +220,8 @@ class UsuarioController {
 
       if (locaisCount > 0) {
         return response.status(400).json({
-          mensagem: "User cannot be deleted because they have associated locatios",
+          mensagem:
+            "User cannot be deleted because they have associated locatios",
         });
       }
 
@@ -225,10 +235,6 @@ class UsuarioController {
     }
   }
 
-
-
-
-
   async searchOne(request, response) {
     const id = request.params.id;
     const usuario = await Usuario.findByPk(id);
@@ -241,8 +247,14 @@ class UsuarioController {
 
     response.json(usuario);
   }
-
-
+  async searchAllForDashboard() {
+    try {
+      const usuarios = await Usuario.findAll();
+      return usuarios; // Retorna os dados
+    } catch (error) {
+      throw new Error("Erro ao buscar usuários");
+    }
+  }
 }
 
 module.exports = new UsuarioController();

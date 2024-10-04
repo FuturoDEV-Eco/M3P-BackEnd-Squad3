@@ -3,7 +3,7 @@ const cors = require("cors");
 const routes = require("./routes/routes");
 const connection = require("./database/connection");
 const APP_PORT = process.env.APP_PORT;
-require('./models/associations'); // Cambiado a require
+require("./models/associations"); // Cambiado a require
 
 class Server {
   constructor(server = express()) {
