@@ -58,7 +58,7 @@ RecycleSpot API is a system developed to automate actions related to storing inf
 
 4. Configure environment variables:
 
-   Create a `.env` file in the project root (`/src`) with the following content:
+   Create a `.env` file in the project root with the following content:
 
 ```
 APP_PORT=3000
@@ -83,13 +83,7 @@ JWT_SECRET=j438n493n7348n5
 npx sequelize db:seed:all
 ```
 
-7. Ensure your database is running and when on `/src` folder run the following:
-
-   ```bash
-   cd /src
-   ```
-
-8. Start the server:
+7. Ensure your database is running and when on root start the server:
 
    ```bash
    nodemon index.js
