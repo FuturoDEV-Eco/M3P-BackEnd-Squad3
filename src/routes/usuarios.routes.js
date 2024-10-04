@@ -52,7 +52,8 @@ usuariosRoutes.post(
 );
 
 usuariosRoutes.get(
-  "/", authUser,
+  "/",
+  authUser,
   /* 
     #swagger.tags = ['Usuários'],
     #swagger.description = 'Endpoint para buscar todos os usuários',
@@ -83,7 +84,8 @@ usuariosRoutes.get(
 );
 
 usuariosRoutes.put(
-  "/:id", authUser,
+  "/:id",
+  authUser,
   /* 
     #swagger.tags = ['Usuários'],
     #swagger.description = 'Endpoint para atualizar um usuário',
@@ -131,8 +133,9 @@ usuariosRoutes.put(
 );
 
 usuariosRoutes.delete(
-  "/:id", authUser,
-  
+  "/:id",
+  authUser,
+
   /* 
     #swagger.tags = ['Usuários'],
     #swagger.description = 'Endpoint para deletar um usuário',
@@ -153,7 +156,8 @@ usuariosRoutes.delete(
 );
 
 usuariosRoutes.get(
-  "/:id", authUser,
+  "/:id",
+  authUser,
   /* 
     #swagger.tags = ['Usuários'],
     #swagger.description = 'Endpoint para buscar um usuário pelo ID',

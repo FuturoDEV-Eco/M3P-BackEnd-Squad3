@@ -1,5 +1,5 @@
 const { verify } = require("jsonwebtoken");
-const Usuario = require('../models/Usuario')
+const Usuario = require("../models/Usuario");
 
 async function authUser(request, response, next) {
   try {
@@ -22,7 +22,6 @@ async function authUser(request, response, next) {
       if (!user) {
         return response.status(401).json({ message: "User not found" });
       }
-
 
       request.currentId = result.id;
       next();
