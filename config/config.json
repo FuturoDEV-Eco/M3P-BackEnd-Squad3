@@ -1,22 +1,22 @@
 {
   "development": {
     "username": "postgres",
-    "password": "vm,-!Ij^Q,4'Si@%",
-    "database": "backend-projectm3",
+    "password": "postgres",
+    "database": "m02project",
     "host": "localhost",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
-    "password": "vm,-!Ij^Q,4'Si@%",
-    "database": "backend-projectm3",
+    "password": "postgres",
+    "database": "m02project",
     "host": "localhost",
     "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
-    "password": "vm,-!Ij^Q,4'Si@%",
-    "database": "backend-projectm3",
+    "password": "postgres",
+    "database": "m02project",
     "host": "localhost",
     "dialect": "postgres"
   }
