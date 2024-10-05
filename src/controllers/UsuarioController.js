@@ -96,7 +96,7 @@ class UsuarioController {
 
       const usuarioPlain = usuario.get({ plain: true });
       const maskedUsuario = {
-        ...usuarioPlain, // Spread the properties of the created user
+        ...usuarioPlain,
         cpf: "*****",
         endereco: "*****",
         dataNascimento: "*****",
@@ -215,8 +215,16 @@ class UsuarioController {
       if (dados.sexo) usuario.sexo = dados.sexo;
 
       await usuario.save();
+      const usuarioPlain = usuario.get({ plain: true });
+      const maskedUsuario = {
+        ...usuarioPlain,
+        cpf: "*****",
+        endereco: "*****",
+        dataNascimento: "*****",
+        password_hash: "*****",
+      };
 
-      response.json(usuario);
+      response.json(maskedUsuario);
     } catch (error) {
       response.status(500).json({
         mensagem: "Unable to update user",
@@ -269,7 +277,7 @@ class UsuarioController {
   async searchAllForDashboard() {
     try {
       const usuarios = await Usuario.findAll();
-      return usuarios; // Retorna os dados
+      return usuarios;
     } catch (error) {
       throw new Error("Erro ao buscar usuários");
     }
