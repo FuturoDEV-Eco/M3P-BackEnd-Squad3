@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
 const Usuario = require("../models/Usuario");
+const Location = require("../models/local");
 
 class UsuarioController {
   async create(request, response) {
@@ -243,7 +244,7 @@ class UsuarioController {
         });
       }
 
-      const locaisCount = await Local.count({ where: { userId: id } });
+      const locaisCount = await Location.count({ where: { userId: id } });
 
       if (locaisCount > 0) {
         return response.status(400).json({
