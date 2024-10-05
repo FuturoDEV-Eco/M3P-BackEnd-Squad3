@@ -271,8 +271,15 @@ class UsuarioController {
         mensagem: "Unable to find an user with the given id",
       });
     }
-
-    response.json(usuario);
+    const usuarioPlain = usuario.get({ plain: true });
+    const maskedUsuario = {
+      ...usuarioPlain,
+      cpf: "*****",
+      endereco: "*****",
+      dataNascimento: "*****",
+      password_hash: "*****",
+    };
+    response.json(maskedUsuario);
   }
   async searchAllForDashboard() {
     try {
