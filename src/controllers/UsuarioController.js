@@ -93,7 +93,17 @@ class UsuarioController {
         endereco,
         sexo,
       });
-      return response.status(201).json(usuario);
+
+      const usuarioPlain = usuario.get({ plain: true });
+      const maskedUsuario = {
+        ...usuarioPlain, // Spread the properties of the created user
+        cpf: "*****",
+        endereco: "*****",
+        dataNascimento: "*****",
+        password_hash: "*****",
+      };
+
+      return response.status(201).json(maskedUsuario);
     } catch (error) {
       response.status(500).json({
         mensagem: "Unable to create user",
@@ -134,7 +144,16 @@ class UsuarioController {
       console.log(request.query);
 
       const usuarios = await Usuario.findAll({ where });
-      response.json(usuarios);
+
+      const maskedUsuarios = usuarios.map((user) => ({
+        ...user["dataValues"],
+        cpf: "*****",
+        endereco: "*****",
+        dataNascimento: "*****",
+        password_hash: "*****",
+      }));
+
+      response.json({ maskedUsuarios });
     } catch (error) {
       response.status(500).json({
         mensagem: "Unable to search for users",
