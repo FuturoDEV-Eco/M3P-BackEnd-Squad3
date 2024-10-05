@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
 const Usuario = require("../models/Usuario");
+const Location = require("../models/local");
 
 class UsuarioController {
   async create(request, response) {
@@ -93,7 +94,17 @@ class UsuarioController {
         endereco,
         sexo,
       });
-      return response.status(201).json(usuario);
+
+      const usuarioPlain = usuario.get({ plain: true });
+      const maskedUsuario = {
+        ...usuarioPlain,
+        cpf: "*****",
+        endereco: "*****",
+        dataNascimento: "*****",
+        password_hash: "*****",
+      };
+
+      return response.status(201).json(maskedUsuario);
     } catch (error) {
       response.status(500).json({
         mensagem: "Unable to create user",
@@ -134,7 +145,16 @@ class UsuarioController {
       console.log(request.query);
 
       const usuarios = await Usuario.findAll({ where });
-      response.json(usuarios);
+
+      const maskedUsuarios = usuarios.map((user) => ({
+        ...user["dataValues"],
+        cpf: "*****",
+        endereco: "*****",
+        dataNascimento: "*****",
+        password_hash: "*****",
+      }));
+
+      response.json({ maskedUsuarios });
     } catch (error) {
       response.status(500).json({
         mensagem: "Unable to search for users",
@@ -196,8 +216,16 @@ class UsuarioController {
       if (dados.sexo) usuario.sexo = dados.sexo;
 
       await usuario.save();
+      const usuarioPlain = usuario.get({ plain: true });
+      const maskedUsuario = {
+        ...usuarioPlain,
+        cpf: "*****",
+        endereco: "*****",
+        dataNascimento: "*****",
+        password_hash: "*****",
+      };
 
-      response.json(usuario);
+      response.json(maskedUsuario);
     } catch (error) {
       response.status(500).json({
         mensagem: "Unable to update user",
@@ -216,7 +244,7 @@ class UsuarioController {
         });
       }
 
-      const locaisCount = await Local.count({ where: { userId: id } });
+      const locaisCount = await Location.count({ where: { userId: id } });
 
       if (locaisCount > 0) {
         return response.status(400).json({
@@ -244,13 +272,20 @@ class UsuarioController {
         mensagem: "Unable to find an user with the given id",
       });
     }
-
-    response.json(usuario);
+    const usuarioPlain = usuario.get({ plain: true });
+    const maskedUsuario = {
+      ...usuarioPlain,
+      cpf: "*****",
+      endereco: "*****",
+      dataNascimento: "*****",
+      password_hash: "*****",
+    };
+    response.json(maskedUsuario);
   }
   async searchAllForDashboard() {
     try {
       const usuarios = await Usuario.findAll();
-      return usuarios; // Retorna os dados
+      return usuarios;
     } catch (error) {
       throw new Error("Erro ao buscar usuários");
     }

@@ -4,9 +4,8 @@ const Local = require("../models/local");
 
 class LocalController {
   async create(request, response) {
-    const { nome, cep, bairro, logradouro, estado, numero, residuos_aceitos } =
-      request.body;
-    let { coordenadas, descricao, localidade } = request.body;
+    const { nome, cep, bairro, logradouro, estado, numero } = request.body;
+    let { coordenadas, descricao, localidade, residuos_aceitos } = request.body;
     const userId = request.currentId;
     const errors = [];
 
@@ -14,12 +13,21 @@ class LocalController {
       "Vidro",
       "Metal",
       "Papel",
+      "Papelão",
       "Plástico",
       "Orgânicos",
       "Baterias",
       "Eletrônicos",
       "Móveis",
     ];
+
+    if (!Array.isArray(residuos_aceitos)) {
+      return response.status(400).json({
+        msg: "residuos_aceitos must be an array",
+        param: "residuos_aceitos",
+      });
+    }
+
     const invalidResiduos = residuos_aceitos.filter(
       (residuo) => !validResiduos.includes(residuo),
     );
