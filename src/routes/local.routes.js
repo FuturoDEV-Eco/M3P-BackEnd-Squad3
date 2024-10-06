@@ -50,7 +50,6 @@ localRoutes.post(
 
 localRoutes.get(
   "/",
-  authUser,
   /* 
     #swagger.tags = ['Locais'],
     #swagger.description = 'Endpoint para buscar todos os locais',
