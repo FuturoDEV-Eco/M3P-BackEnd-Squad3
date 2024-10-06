@@ -191,6 +191,12 @@ class UsuarioController {
       });
     }
 
+    if ( cpf !== undefined) {
+      return response.status(403).json({
+        mensagem: "Use CPF cannot be modified",
+      });
+    }
+
     if (errors.length > 0) {
       return response.status(400).json({ errors });
     }
