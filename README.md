@@ -70,23 +70,10 @@ DB_USER=postgres
 DB_PASSWORD=postgres
 JWT_SECRET=j438n493n7348n5
 ```
-
-5.  Move to the `/src` folder and run the migrations to create the database tables:
-
-   ```bash
-        npx sequelize db:migrate
-   ```
-
-6(optional). Run seeders to populate the database tables:
-
-```bash
-npx sequelize db:seed:all
-```
-
-7. Ensure your database is running and when on root start the server:
+7. Ensure your postgres database was created with the name `m02project` and when on root run the docker compose:
 
    ```bash
-   nodemon index.js
+   docker-compose up --build
    ```
 
 ### API Documentation
