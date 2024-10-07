@@ -116,6 +116,9 @@ http://localhost:3000/docs
 - **DELETE /location/:location_id**: Delete a specific location.
 - **GET /location/:location_id/maps**: Google Maps link for the location.
 
+- ### Dashboard
+- **GET /dashboard**: List of analytics of the database.
+
 ## How to Run Locally
 
 1. Follow the installation and environment setup instructions.
@@ -131,7 +134,3 @@ http://localhost:3000/docs
 ## Contributions
 
 Contributions are welcome! Please open an issue or submit a pull request.
-
-## Contact
-
-For questions and suggestions, please contact via email: fvhmanhaes@gmail.comn
