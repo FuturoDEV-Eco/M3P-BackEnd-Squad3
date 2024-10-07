@@ -1,10 +1,10 @@
-# RecycleSpot API ♻️
+# RecycleMAP API ♻️
 
 <img width="960" alt="recycle_spot_api - Copia" src="https://github.com/user-attachments/assets/53ec329b-e8c6-4829-863e-8a5b6f276bd2">
 
 ## Description
 
-RecycleSpot API is a system developed to automate actions related to storing information about waste collection locations and users. This system allows management of users and collection locations, ensuring data security and integrity through JWT authentication.
+RecycleMap API is a system developed to automate actions related to storing information about waste collection locations and users. This system allows management of users and collection locations, ensuring data security and integrity through JWT authentication.
 
 ## Technologies
 
