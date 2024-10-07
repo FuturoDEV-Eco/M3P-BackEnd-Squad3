@@ -55,7 +55,8 @@ class LoginController {
 
       response.json({
         token: token,
-        name: user.name,
+        name: user.nome,
+        id: user.id
       });
     } catch (error) {
       console.log(error);
