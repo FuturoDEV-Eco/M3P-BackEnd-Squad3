@@ -3,21 +3,21 @@
     "username": "postgres",
     "password": "postgres",
     "database": "m02project",
-    "host": "postgres",
+    "host": "localhost",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
     "password": "postgres",
     "database": "m02project",
-    "host": "postgres",
+    "host": "localhost",
     "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
     "password": "postgres",
     "database": "m02project",
-    "host": "postgres",
+    "host": "localhost",
     "dialect": "postgres"
   }
 }
