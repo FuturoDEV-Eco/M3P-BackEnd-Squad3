@@ -1,6 +1,7 @@
 # RecycleMAP API ♻️
 
-<img width="960" alt="recycle_spot_api - Copia" src="https://github.com/user-attachments/assets/53ec329b-e8c6-4829-863e-8a5b6f276bd2">
+<img width="749" alt="image" src="https://github.com/user-attachments/assets/ae007b45-282e-41f5-8f9b-b36511769486">
+
 
 ## Description
 
